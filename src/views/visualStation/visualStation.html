@@ -1,0 +1,19 @@
+<div class="visual-station-container">
+    <div class="visual-station-operate-panel-container" ng-style="$ctrl.operatecontainerStyle">
+        <div class="visual-station-operate-panel-button-bar">
+            <div class="btn-toolbar btn-group-map-event">
+                <div class="btn-group" role="group" aria-label="...">
+                    <button type="button" class="btn btn-default" ng-click="$ctrl.onChangeMessage()">Left</button>
+                    <button type="button" class="btn btn-default" ng-click="$ctrl.onAddFeatureLayer()">addFeatureLayer</button>
+                    <button type="button" class="btn btn-default" ng-click="$ctrl.onLocationFeature()">locationFeature</button>
+                </div>
+            </div>
+        </div>
+        <div class="visual-station-operate-panel-message">
+            <div ng-bind="'event info： ' + $ctrl.result.messageInfo"></div>
+        </div>
+    </div>
+    <div class="visual-station-map-container" ng-style="$ctrl.mapcontainerStyle">
+        <gis></gis>
+    </div>
+</div>
