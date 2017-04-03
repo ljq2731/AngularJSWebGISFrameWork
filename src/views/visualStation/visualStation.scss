@@ -49,11 +49,20 @@
 }
 
 .visual-station-map-container {
-    position: absolute;    
+    position: absolute;
     left: 350px;
     right: 0;
-    top:0;
+    top: 0;
     bottom: 0;
+}
+
+.visual-station-building-view-container {
+    position: absolute;
+    left: 350px;
+    top: 0;
+    bottom: 0;
+    width: 400px;
+    // height: 600px;  
 }
 
 .btn-group-map-event {

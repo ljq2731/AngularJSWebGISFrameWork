@@ -1,5 +1,5 @@
 <div class="visual-station-container">
-    <div class="visual-station-operate-panel-container" ng-style="$ctrl.operatecontainerStyle">
+    <div class="visual-station-operate-panel-container" ng-style="$ctrl.operateContainerStyle">
         <div class="visual-station-operate-panel-button-bar">
             <div class="btn-toolbar btn-group-map-event">
                 <div class="btn-group" role="group" aria-label="...">
@@ -13,7 +13,10 @@
             <div ng-bind="'event info： ' + $ctrl.result.messageInfo"></div>
         </div>
     </div>
-    <div class="visual-station-map-container" ng-style="$ctrl.mapcontainerStyle">
+    <div class="visual-station-map-container" ng-style="$ctrl.mapContainerStyle">
         <gis></gis>
+    </div>
+    <div class="visual-station-building-view-container" ng-style="$ctrl.buildingViewContainerStyle">
+        <building-view></building-view>
     </div>
 </div>

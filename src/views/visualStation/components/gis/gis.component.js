@@ -16,7 +16,7 @@
 
         function $onInit() {
             //
-            map = GisService.createMap();            
+            map = GisService.createMap();
             //
             interactionSelected = GisService.registerMapInteractionSelected(map, featureSelectedEventHandle, selectedStyleMap, layerSelected);
             //

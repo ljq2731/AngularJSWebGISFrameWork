@@ -10,8 +10,9 @@
          self.result = {
              messageInfo: 'Welcome to visualStation Page'
          };
-         self.operatecontainerStyle = {};
-         self.mapcontainerStyle = {};
+         self.operateContainerStyle = {};
+         self.mapContainerStyle = {};
+         self.buildingViewContainerStyle = {};
          self.$onInit = $onInit;
          self.$onDestroy = $onDestroy;
          self.onChangeMessage = onChangeMessage;
@@ -33,11 +34,11 @@
          function onChangeMessage() {
              self.result.messageInfo = "aaa";
              console.log("onChangeMessage");
-             self.operatecontainerStyle = {
+             self.operateContainerStyle = {
                  width: '0',
                  visible: 'none'
              };
-             self.mapcontainerStyle = {
+             self.mapContainerStyle = {
                  left: '0'
              };
              $timeout(function () {

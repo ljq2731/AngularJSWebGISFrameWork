@@ -115,6 +115,9 @@ gulp.task('copy', function () {//
     gulp.src('./src/index.html')
         //.pipe(useref())
         .pipe(gulp.dest('./dist'));
+    gulp.src('./src/**/*.png')
+        //.pipe(useref())
+        .pipe(gulp.dest('./dist'));
     
 });
 

@@ -30,6 +30,13 @@
         //rerun: true,
         //reconfig: true,
         files: ['views/visualStation/components/gis/gis.module.js', 'views/visualStation/components/gis/gis.service.js', 'views/visualStation/components/gis/gis.component.js', 'views/visualStation/components/gis/gis.css']
+      },{
+        name: 'building-view',
+        serie: true,
+        cache: 'false',
+        //rerun: true,
+        //reconfig: true,
+        files: ['views/visualStation/components/building-view/building-view.module.js', 'views/visualStation/components/building-view/building-view.service.js', 'views/visualStation/components/building-view/building-view.component.js', 'views/visualStation/components/building-view/building-view.css']
       }, {
         name: 'openlayers',
         serie: true,

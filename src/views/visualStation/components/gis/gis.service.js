@@ -87,17 +87,17 @@
           }
 
 
-        function addPolygonFeatureLayer(map, layerName, selectedStyleMap, layerSelected) {
-            var featureLayer = new ol.layer.Vector({
-                source: new ol.source.Vector({
-                    url: '../data/geojson/countries.geojson',
-                    format: new ol.format.GeoJSON()
-                })
-            });
-            console.log("add vector polygon!");
-            map.addLayer(featureLayer);
-            return featureLayer;
-        }
+          function addPolygonFeatureLayer(map, layerName, selectedStyleMap, layerSelected) {
+              var featureLayer = new ol.layer.Vector({
+                  source: new ol.source.Vector({
+                      url: '../data/geojson/countries.geojson',
+                      format: new ol.format.GeoJSON()
+                  })
+              });
+              console.log("add vector polygon!");
+              map.addLayer(featureLayer);
+              return featureLayer;
+          }
 
           function addPointFeatureLayer(map, layerName, selectedStyleMap, layerSelected) {
               var count = 10;
