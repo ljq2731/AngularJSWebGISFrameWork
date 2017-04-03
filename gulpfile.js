@@ -5,11 +5,10 @@ var gulp = require('gulp'),
     useref = require('gulp-useref'),
     series = require('stream-series');
 var clean = require('gulp-clean');
-var stylus = require('gulp-stylus'),
+var sass = require('gulp-sass'),
     nib = require('nib'),
     minifyCss = require('gulp-minify-css'),
     uncss = require('gulp-uncss');
-
 var eslint = require('gulp-eslint'),
     uglify = require('gulp-uglify');
 
@@ -38,10 +37,10 @@ gulp.task('eslint', function () {
         .pipe(connect.reload());
 });
 
-// stylus
+// scss
 gulp.task('css', function () {
-    return gulp.src('./src/**/*.styl')
-        .pipe(stylus())
+    return gulp.src('./src/**/*.scss')
+        .pipe(sass())
         .pipe(gulp.dest('./dist'))
         .pipe(connect.reload());
 });
@@ -122,7 +121,7 @@ gulp.task('copy', function () {//
 // watch
 gulp.task('watch', function () {
     gulp.watch(['./src/**/*.html'], ['html']);
-    gulp.watch(['./src/**/*.styl'], ['css', 'inject']);
+    gulp.watch(['./src/**/*.scss'], ['css', 'inject']);
     gulp.watch(['./src/**/*.js', './gulpfile.js'], ['eslint', 'inject']);
     //gulp.watch(['./bower.json'], ['wiredep']);
 });
