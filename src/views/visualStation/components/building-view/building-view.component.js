@@ -13,26 +13,68 @@
 
         function $onInit() {
             //
+            registerListenerInterface();
+        }
 
+        function registerListenerInterface() {
+            $scope.$on('gis-resizeBuildingView', resizeBuildingViewEventHandle);
         }
 
         function $postLink() {
+            updateBuilding();
+            //
             createBuilding();
         }
 
-        function createBuilding() {
+        function resizeBuildingViewEventHandle() {
+            createBuilding();
+        }
+        //
+        function updateBuilding() {
             _svg = d3.select("#building-view-map");
+            var svgDom = $("#building-view-map")[0];
+
+            svgDom.addEventListener("SVGResize", createBuilding);
+
             // var width = +svg.attr("width");
             // var height = +svg.attr("height");
             // console.log(width + "   " + height);
             // var angles = d3.range(0, 2 * Math.PI, Math.PI / 200);
             // console.log(width + "   " + height + "  " + angles);
             //
+            _svg.on('onresize', function () {
+                //
+                console.log('     --         onresize       --     ');
+            }, false);
+
+            $(".building-view-content-building").resize(function () {
+                //
+                console.log('     --         resize       --     ');
+            });
+
+        }
+
+        function createBuilding() {
+            //
             var svgDom = $("#building-view-map")[0];
             var svgWidth = svgDom.clientWidth;
             var svgHeight = svgDom.clientHeight;
             console.log(svgWidth + '   ' + svgHeight);
-
+            var svgDomChildNodes = svgDom.childNodes;
+            for (var i = svgDomChildNodes.length - 1; i > -1; i--) {
+                svgDom.removeChild(svgDomChildNodes[i]);
+            }
+            //
+            console.log(svgDom.childNodes.length);
+            //
+             _svg.append("line")
+                .attr("x1", svgWidth / 2)
+                .attr("y1", 10)
+                .attr("x2", svgWidth / 2)
+                .attr("y2", svgHeight - 10)
+                .attr("stroke", '#06f5f8')
+                .attr("stroke-width", 2);
+            //
             var top = 30;
             var left = 30;
             var angule = -30;
@@ -60,6 +102,11 @@
                 createBuildingFloor(i == count, id, svgWidth, svgHeight, left, currentTop, width, height, angule, floorHeight, fill, opacity, stroke, strokeWidth, strokeLinejoin);
                 //
             }
+            //
+            // <line x1="0" y1="0" x2="300" y2="300" style="stroke:rgb(99,99,99);stroke-width:2"/>
+           
+
+
         }
 
         function createBuildingFloor(first, id, svgWidth, svgHeight, left, top, width, height, angule, floorHeight, fill, opacity, stroke, strokeWidth, strokeLinejoin) {
@@ -147,7 +194,7 @@
                 //     alert('from parent:' + data.name);
                 // }
                 //    阻止事件向后传递
-                event.stopPropagation();
+                //event.stopPropagation();
             }, false);
         }
 
@@ -174,7 +221,7 @@
                 //     alert('from parent:' + data.name);
                 // }
                 //    阻止事件向后传递
-                event.stopPropagation();
+                //event.stopPropagation();
             }, false);
         }
 

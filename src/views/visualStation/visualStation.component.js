@@ -18,6 +18,7 @@
          self.onChangeMessage = onChangeMessage;
          self.onAddFeatureLayer = onAddFeatureLayer;
          self.onLocationFeature = onLocationFeature;
+         self.onResizeBuildingView = onResizeBuildingView;
 
          function $onInit() {
              registerEventListener();
@@ -53,6 +54,18 @@
 
          function onLocationFeature() {
              $scope.$broadcast('gis-locationFeature', 'locationFeature');
+         }
+
+         function onResizeBuildingView() {
+             self.buildingViewContainerStyle = {
+                 width: '600'
+             };
+             //
+             $timeout(function () {
+                 console.log('buildingViewContainerStyle');
+                 $scope.$broadcast('gis-resizeBuildingView', 'resizeBuildingView');
+             }, 1000);
+
          }
 
          function featureSelectedHandle(event, data) {
