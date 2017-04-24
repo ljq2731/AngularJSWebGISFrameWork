@@ -1,0 +1,82 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Leaflet Quick Start Guide Example</title>
+	<meta charset="utf-8" />
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<!--
+	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.0-rc.3/dist/leaflet.css" />
+	-->
+	<link rel="stylesheet" href="leaflet/Leaflet 1.0.0-rc3/leaflet.css" />
+	<style>
+		html { height: auto; }
+		body { height: auto; margin: 0; padding: 0; font-family: Georgia, serif; font-size: 0.9em; }    
+		#mapid { height: auto; position: absolute; bottom: 0; left: 0; right: 0; top: 0; }
+    
+	</style>
+</head>
+<body>
+	<div id="mapid"></div>
+	<!--
+	<script src="https://unpkg.com/leaflet@1.0.0-rc.3/dist/leaflet.js"></script>
+	-->
+	<script src="leaflet/Leaflet 1.0.0-rc3/leaflet.js"></script>
+	<script src="leaflet/Leaflet.ChineseTmsProviders/src/leaflet.ChineseTmsProviders.js"></script>
+	<script>
+
+		var mymap = L.map('mapid', {crs:L.CRS.EPSG3857, minZoom:2, center: [34.27147, 108.94249],zoom: 13});
+
+		//var mymap = L.map('mapid', {crs:L.CRS.EPSG3857, center: {lon:12078164.751070183, lat:4029307.9280503336},zoom: 13});
+		
+//L.map('mapid',{trackResize:true}).setView([108.0, 34], 13);
+		//Map: "http://t{s}.tianditu.cn/DataServer?T=vec_w&X={x}&Y={y}&L={z}",     http://192.168.56.1:8080/map/{z}/{y}/{x}.png
+        //Annotion: "http://t{s}.tianditu.cn/DataServer?T=cva_w&X={x}&Y={y}&L={z}",      http://192.168.56.1:8080/label/{z}/{y}/{x}.png
+		L.tileLayer('http://t1.tianditu.cn/DataServer?T=vec_w&X={x}&Y={y}&L={z}', {
+			maxZoom: 18,
+			attribution: '',
+			id: 'tdtmap'
+		}).addTo(mymap);
+
+		L.tileLayer('http://t1.tianditu.cn/DataServer?T=cva_w&X={x}&Y={y}&L={z}', {
+			maxZoom: 18,
+			attribution: '',
+			id: 'tdtmap'
+		}).addTo(mymap);
+		
+		
+		//L.marker([34.27147, 108.94249]).addTo(mymap).bindPopup("<b>Hello world!</b><br />I am a popup.").openPopup();
+		
+		L.marker([34.261, 108.94235]).addTo(mymap);  // 西安
+		L.marker([39.90609, 116.38543]).addTo(mymap);   //北京
+		L.marker([29.55546, 106.5448]).addTo(mymap);    // 重庆
+		L.marker([30.56781, 114.30222]).addTo(mymap);   //湖北
+		L.marker([18.23522, 109.51085]).addTo(mymap);   //海南
+		L.marker([50.24529, 127.50091]).addTo(mymap);   //黑海
+		L.marker([47.84907, 88.13144]).addTo(mymap);   //阿勒泰
+		L.marker([39.46739, 75.99394]).addTo(mymap);   //喀什
+		L.marker([29.65541, 91.12732]).addTo(mymap);   //拉萨
+		L.marker([36.63685, 101.74367]).addTo(mymap);   //西宁
+		L.marker([43.89736, 125.30672]).addTo(mymap);   //长春
+		L.marker([25.05091, 102.71344]).addTo(mymap);   //昆明
+		L.marker([23.13177, 113.26015]).addTo(mymap);   //广州
+		L.marker([36.66124, 116.9878]).addTo(mymap);   //济南
+		L.marker([31.31974, 121.62005]).addTo(mymap);   //上海
+		
+		
+		//
+		var popup = L.popup();
+
+		function onMapClick(e) {
+			popup
+				.setLatLng(e.latlng)
+				.setContent("You clicked the map at " + e.latlng.toString())
+				.openOn(mymap);
+		}
+
+		mymap.on('click', onMapClick);
+
+	</script>
+</body>
+</html>

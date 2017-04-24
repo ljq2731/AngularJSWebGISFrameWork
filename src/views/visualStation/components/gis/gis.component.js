@@ -9,6 +9,7 @@
         var self = this;
         self.$onInit = $onInit;
 
+
         var map = null;
         var interactionSelected = null;
         var selectedStyleMap = {};
@@ -20,7 +21,7 @@
             //
             interactionSelected = GisService.registerMapInteractionSelected(map, featureSelectedEventHandle, selectedStyleMap, layerSelected);
             //
-            GisService.addPolygonFeatureLayer(map, 'featureLayerPolygon', selectedStyleMap, layerSelected);
+            //GisService.addPolygonFeatureLayer(map, 'featureLayerPolygon', selectedStyleMap, layerSelected);
             //
             registerMapInterface();
         }
@@ -56,7 +57,7 @@
         }
         //
         function featureSelectedEventHandle(e) {
-            // console.log(e);
+            console.log(e);
             // console.log(e.target.getFeatures());
             // console.log(e.selected);
             // console.log(e.deselected);

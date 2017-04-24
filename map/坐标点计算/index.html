@@ -1,0 +1,158 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Leaflet Quick Start Guide Example</title>
+	<meta charset="utf-8" />
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<!--
+	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.0-rc.3/dist/leaflet.css" />
+	-->
+	<link rel="stylesheet" href="leaflet/Leaflet 0.7.7/leaflet.css" />
+	<style>
+		html { height: auto; }
+		body { height: auto; margin: 0; padding: 0; font-family: Georgia, serif; font-size: 0.9em; }    
+		#mapid { height: auto; position: absolute; bottom: 0; left: 0; right: 0; top: 0; }
+    
+	</style>
+</head>
+<body>
+	<div id="mapid"></div>
+	<!--
+	<script src="https://unpkg.com/leaflet@1.0.0-rc.3/dist/leaflet.js"></script>
+	-->
+	<script src="leaflet/Leaflet 0.7.7/leaflet.js"></script>
+	<!--
+	<script src="Leaflet.ChineseTmsProviders/src/leaflet.ChineseTmsProviders.js"></script>
+	-->
+	<script src="leaflet/scripts/TileLayerSogou.js"></script>
+	<script>
+		
+		//
+		var normalm = L.tileLayer.soGouMap({
+			//tileSize: 128,
+			maxZoom: 18
+		});
+		
+		var map = L.map("mapid", {
+			//crs:L.CRS.EPSG3857,
+			crs:L.CRS.EPSG3857,
+			center: [34.27147, 108.94249],
+			zoom: 2,
+			layers: [normalm],
+			zoomControl: false
+		});
+
+		L.control.zoom({
+			zoomInTitle: '放大',
+			zoomOutTitle: '缩小'
+		}).addTo(map);
+
+
+		//L.marker([21.66264, 66.61867]).addTo(map).bindPopup("<b>Hello world!</b><br />I am a popup.").openPopup();
+			
+		/*
+		console.log(gcj02_To_Bd09(34.27147, 108.94249));
+		console.log(bd09_To_Gcj02(34.27147, 108.94249));
+		//
+		console.log(bd_encrypt(34.27147, 108.94249));
+		console.log(bd_decrypt(34.27147, 108.94249));
+		*/
+		
+		var popup = L.popup();
+
+		function onMapClick(e) {
+			popup
+				.setLatLng(e.latlng)
+				.setContent("You clicked the map at " + e.latlng.toString())
+				.openOn(map);
+		}
+		
+		map.on('click', onMapClick);
+		/*
+		//
+		L.marker([34.261, 108.94235]).addTo(map);
+		//
+		//[46.74464, 142.33976]   // 39.90609, 116.38543
+		var bjLat = 39.90609 + 6.24961 + (39.90609 - 34.261)/9.585169966380276;
+		var bjLog = (116.38543 - 108.94249) / 4.4848638226078576 + 116.38543 + 24.29473;
+		L.marker([bjLat, bjLog]).addTo(map);
+		console.log(bjLat +  "   " + bjLog);
+		//[35.18512, 130.30516]   //  29.55546, 106.5448 
+		var cqLat = 29.55546 + 6.24961 + (29.55546 - 34.261)/9.585169966380276;
+		var cqLog = (106.5448 - 108.94249) / 4.484863822607857 + 106.5448 + 24.29473;
+		console.log(cqLat +  "   " + cqLog);
+		L.marker([cqLat, cqLog]).addTo(map);
+		//                       //   30.56779, 114.30224
+		var hbLat = 30.56779 + 6.24961 + (30.56779 - 34.261)/9.585169966380276;
+		var hbLog = (114.30224 - 108.94249) / 4.484863822607857 + 114.30224 + 24.29473;
+		console.log(hbLat +  "   " + hbLog);
+		L.marker([hbLat, hbLog]).addTo(map);
+		*/
+		
+		/*
+		name	sgY	        sgX		        tdtY	    tdtX
+		西安	40.51061	133.23708		34.261	    108.94235
+		北京	46.74464	142.33976		39.90609	116.38543
+		重庆	35.18512	130.30516		29.55546	106.5448
+		湖北	36.34007	139.79229		30.56781	114.30222
+		海南	21.97981	133.93239		18.23522	109.51085
+		黑海	57.65537	155.9343		50.24529	127.50091
+		阿勒泰	55.19016	107.78534		47.84907	88.13144
+		喀什	46.26669	92.94103		39.46739	75.99394
+		拉萨	35.29941	111.44924		29.65541	91.12732
+		西宁	43.15613	124.43305		36.63685	101.74367
+		长春	51.03908	153.2508		43.89736	125.30672
+		昆明	29.99056	125.61914		25.05091	102.71344
+		广州	27.75185	138.51779		23.13177	113.26015
+		济南	43.18309	143.07674		36.66124	116.9878
+		上海	37.1947	    148.74201		31.31974	121.62005
+		*/
+		var latArr = [34.261,39.90609,
+					29.55546,
+					30.56781,
+					18.23522,
+					50.24529,
+					47.84907,
+					39.46739,
+					29.65541,
+					36.63685,
+					43.89736,
+					25.05091,
+					23.13177,
+					36.66124,
+					31.31974];
+		var logArr = [108.94235,116.38543,
+					106.5448,
+					114.30222,
+					109.51085,
+					127.50091,
+					88.13144,
+					75.99394,
+					91.12732,
+					101.74367,
+					125.30672,
+					102.71344,
+					113.26015,
+					116.9878,
+					121.62005
+					];
+		
+		for(var i=0; i<latArr.length; i++)
+		{			
+			//var yLat = 1.11362669 * latArr[i] + 2.14347128;
+			//var yLat = -0.00261773 * Math.pow(latArr[i], 2) + 1.2954873 * latArr[i] + -0.80282994;	
+			var latTemp = Math.cos(latArr[i]/90.0*Math.PI);			
+			var yLat = 0.00521972 * Math.pow(latTemp, 4) - 0.00891751 * Math.pow(latTemp, 3) + 0.22977745 * Math.pow(latTemp, 2) + 1.02298017 * latTemp -0.24894955;			
+			yLat = Math.acos(yLat)/Math.PI*90;			
+			//
+			//var xLog = 1.22300355e0 * logArr[i] + 2.30782558e-4;
+			var xLog = -8.43963327e-8 * Math.pow(logArr[i], 2) + 1.22302093 * logArr[i] + -6.44586540e-4
+			console.log(yLat +  "   " + xLog);
+			L.marker([yLat, xLog]).addTo(map);
+		}
+	
+	</script>
+</body>
+</html>

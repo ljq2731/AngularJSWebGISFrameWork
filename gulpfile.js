@@ -139,7 +139,7 @@ gulp.task('index', function () {
     var utilStream = gulp.src(['./src/*.js', '!./src/app.module.js'], {
         read: false
     });
-    var appStream = gulp.src(['./src/app.module.js'], {
+    var appStream = gulp.src(['./src/views/visualStation/components/gis/extend/interactionSelect.js','./src/app.module.js'], {
         read: false
     });
     // inject  // wiredep

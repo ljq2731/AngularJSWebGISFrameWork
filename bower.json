@@ -84,7 +84,7 @@
     "openlayers": {
       "main": [
         "dist/ol.css",
-        "dist/ol.js"
+        "dist/ol-debug.js"
       ]
     }
   }

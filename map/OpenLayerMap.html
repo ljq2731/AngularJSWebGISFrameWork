@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Accessible Map</title>
+    <link rel="stylesheet" href="ol.css" type="text/css">
+    <!-- The line below is only needed for old environments like Internet Explorer and Android 4.x -->
+    <script src="ol-debug.js"></script>
+    <link rel="stylesheet" href="style.css" type="text/css">
+  </head>
+  <body>
+    <div id="map" class="map"></div>
+	<div  align="center" style="position:absolute; top:0px; left:0px; right:0px; align:">
+		<button id="toggle-layer" style="">toggle-layer</button>
+		<button id="zoom-out" style="">Zoom out</button>
+		<button id="zoom-in" style="">Zoom in</button>
+    </div>
+	<div id="popup" class="ol-popup">
+		<a href="#" id="popup-closer" class="ol-popup-closer"></a>
+		<div id="popup-content"></div>
+    </div>
+	<script>
+	  //  http://mt0.google.cn/vt/pb=!1m5!1m4!1i{z}!2i{x}!3i{y}!4i128!2m2!1e0!3i333048300!3m7!2szh-CN!3scn!5e1105!12m1!1e47!12m1!1e3!4e0
+    var googleMap = new ol.layer.Tile({
+        source: new ol.source.XYZ({
+            //url: 'http://mt0.google.cn/vt/pb=!1m5!1m4!1i{z}!2i{x}!3i{y}!4i256!2m2!1e0!3i333048300!3m7!2szh-CN!3scn!5e1105!12m1!1e47!12m1!1e3!4e0',
+            url: 'http://mt{0-3}.google.cn/maps/vt/pb=!1m4!1m3!1i{z}!2i{x}!3i{y}!2m3!1e0!2sm!3i376063156!3m8!2szh-CN!3scn!5e1105!12m4!1e68!2m2!1sset!2sRoadmap!4e0!5m1!1e0',
+			//url: 'http://t1.tianditu.cn/DataServer?T=vec_w&X={x}&Y={y}&L={z}',
+			crossOrigin: '*',
+			projection: 'EPSG:3857',
+            attributions: ''
+        }),
+		visible: false
+    });
+	var openStreetMap = new ol.layer.Tile({
+        source: new ol.source.XYZ({
+            //url: 'http://mt0.google.cn/vt/pb=!1m5!1m4!1i{z}!2i{x}!3i{y}!4i256!2m2!1e0!3i333048300!3m7!2szh-CN!3scn!5e1105!12m1!1e47!12m1!1e3!4e0',
+            url: 'http://a.tile.openstreetmap.org/{z}/{x}/{y}.png',
+			crossOrigin: '*',
+			projection: 'EPSG:3857',
+            attributions: ''
+        }),
+		visible: true
+    });
+	var osmLayer = new ol.layer.Tile({
+        source: new ol.source.OSM()
+    });
+	var layers = [osmLayer, googleMap];
+	  
+	var mousePositionControl = new ol.control.MousePosition({
+        coordinateFormat: ol.coordinate.createStringXY(4),
+        projection: 'EPSG:4326'
+    });    
+		
+	var centerCoordinate = ol.proj.fromLonLat([108.9471367, 34.2644691], 'EPSG:3857');
+	//
+	var container = document.getElementById('popup');
+	var content = document.getElementById('popup-content');
+	var closer = document.getElementById('popup-closer');
+	//
+	var overlay = new ol.Overlay(/** @type {olx.OverlayOptions} */ ({
+        element: container,
+        autoPan: true,
+        autoPanAnimation: {
+			duration: 250
+        }
+    }));
+	//
+	closer.onclick = function() {
+        overlay.setPosition(undefined);
+        closer.blur();
+        return false;
+    };
+	//
+	var map = new ol.Map({
+        layers: layers,
+        target: 'map',
+        controls: ol.control.defaults({
+			attributionOptions: /** @type {olx.control.AttributionOptions} */ ({
+				collapsible: false
+			})
+        }).extend([mousePositionControl]),	
+		overlays: [overlay],
+        view: new ol.View({
+		  projection: 'EPSG:3857',
+          center: centerCoordinate,
+          zoom: 19
+        })
+    });
+	//
+	var stringifyCoordinateFunction = ol.coordinate.createStringXY(7);
+	
+	map.on('singleclick', function(evt) {
+        var coordinate = evt.coordinate;
+        //var hdms = ol.coordinate.toStringHDMS(ol.proj.transform(coordinate, 'EPSG:3857', 'EPSG:4326'));
+        //content.innerHTML = '<p>You clicked here:</p><code>' + hdms + '</code>';
+		var coordinateWGS3857 = stringifyCoordinateFunction(coordinate);
+		var coordinateWGS4326 = stringifyCoordinateFunction(ol.proj.transform(coordinate, 'EPSG:3857', 'EPSG:4326'));
+		content.innerHTML = 'WGS3857: ' + coordinateWGS3857 + '</br>WGS4326: ' + coordinateWGS4326;
+        overlay.setPosition(coordinate);
+    });
+	  
+	//34.2644691,108.9471367,21
+	
+	document.getElementById('toggle-layer').onclick = function() {
+		var layer = map.getLayers().item(0);
+		layer.setVisible(!layer.getVisible());
+		//
+		layer = map.getLayers().item(1);
+		layer.setVisible(!layer.getVisible());		
+    };
+	//	
+    document.getElementById('zoom-out').onclick = function() {
+        var view = map.getView();
+        var zoom = view.getZoom();
+        view.setZoom(zoom - 1);	
+    };
+
+    document.getElementById('zoom-in').onclick = function() {
+        var view = map.getView();
+        var zoom = view.getZoom();
+        view.setZoom(zoom + 1);
+    };
+    </script>
+  </body>
+</html>

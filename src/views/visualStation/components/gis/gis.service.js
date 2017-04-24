@@ -168,6 +168,19 @@
               interactionSelected.on('select', featureSelectedEventHandle);
               map.addInteraction(interactionSelected);
               return interactionSelected;
+
+
+             /*var interactionSelected = new ol.interaction.PointSelect({
+                  layers: layerSelected,
+                  style: function (feature, resolution) {
+                      return getSelectedStyle(feature, resolution, selectedStyleMap);
+                  }
+                  // filter: filterCallback
+              });
+              interactionSelected.on('pointSelect', featureSelectedEventHandle);
+              map.addInteraction(interactionSelected);
+              return interactionSelected;*/
+
           }
 
           function getSelectedStyle(feature, resolution, selectedStyleMap) {
