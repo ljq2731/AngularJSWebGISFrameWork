@@ -1,5 +1,5 @@
 var openStreetMapOffset = getOpenStreetMapLayer();
-var layers = [openStreetMap, googleMap, vectorLayer]; 
+var layers = [openStreetMapOffset, googleMap, vectorLayer]; 
 //  baidu_layer  googleMap  osmLayer openStreetMap   vectorLayer 
 
 //

@@ -38,9 +38,14 @@ function getOpenStreetMapLayer() {
     var projection = ol.proj.get("EPSG:3857");
     var domain = ['a', 'b', 'c'];
     var url = 'http://{a-c}.tile.openstreetmap.org/{z}/{x}/{y}.png';
-    var projectedExtent = [-20038350.342789244, -20037968.342789244,
+    /*var projectedExtent = [-20038350.342789244, -20037968.342789244,
         20038350.342789244, 20037968.342789244
-    ];
+    ];*/
+    /*var projectedExtent = [ -19861978.14181085, -20037968.342789244,
+         19993693.61991471, 20037968.342789244];*/
+         var projectedExtent = [ -20214004.555103615, -20037968.342789244,
+         20081564.183303617, 20037968.342789244];
+
     var maxResolution = ol.extent.getWidth(projectedExtent) / 256;
 
     var resolutions = [];
